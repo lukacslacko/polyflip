@@ -43,6 +43,12 @@ module hinge(width, depth, thickness, n) {
     hinge_rod(width);
 }
 
-for (y=[-8,8]) translate([0,y,0])
-cube([30, 5, 4], center=true);
-hinge(30, 6, 4, 6);
+intersection() {
+    translate([0,0,-100])
+    cube(200, center=true);
+    union() {
+        for (y=[-8,8]) translate([0,y,0])
+        cube([30, 5, 4], center=true);
+        hinge(30, 6, 4, 6);
+    }
+}

@@ -16,8 +16,23 @@ pts = triangle_points(edge_length);
 module face() {
     intersection() {
         hinged_triangle(
-            edge_length=edge_length, depth=depth, thickness=thickness,
-            hinge_n=hinge_n);
+            edge_length=edge_length, 
+            depth=depth, 
+            thickness=thickness,
+            hinge_n=hinge_n,
+            flip=0);
+        linear_extrude(2*thickness, center=true) polygon(pts);
+    }
+}
+
+module outer_face() {
+    intersection() {
+        hinged_triangle(
+            edge_length=edge_length, 
+            depth=depth, 
+            thickness=thickness,
+            hinge_n=hinge_n,
+            flip=1);
         linear_extrude(2*thickness, center=true) polygon(pts);
     }
 }
@@ -36,7 +51,7 @@ module faces() {
         rotate(a)
         translate([0,-edge_length*sqrt(3)/3,0])
         rotate(180)
-        face();
+        outer_face();
 }
 
 module inner_dovetail_piece() {
@@ -132,5 +147,4 @@ module conn_a() {
     keep([K,M,S,N]) outer() faces();
 }
 
-rotate([180,0,0])
-conn_a();
+rotate([180,0,0]) conn_a();
