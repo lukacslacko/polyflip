@@ -56,7 +56,11 @@ module faces() {
 
 module inner_dovetail_piece() {
     translate([0, 2+depth-edge_length*sqrt(3)/6, 0])
-    dovetail(width=2*edge_length, n=dovetail_n, thickness=thickness);
+    dovetail(
+        width=2*edge_length, 
+        n=dovetail_n, 
+        thickness=thickness,
+        zig_or_zag=true);
 }
 
 module outer_dovetail_piece() {
@@ -68,7 +72,8 @@ module outer_dovetail_piece() {
         dovetail(
             width=2*edge_length, 
             n=dovetail_n, 
-            thickness=thickness);
+            thickness=thickness,
+            zig_or_zag=false);
 }
 
 module all_inner_dovetails() {
@@ -147,4 +152,8 @@ module conn_a() {
     keep([K,M,S,N]) outer() faces();
 }
 
-rotate([180,0,0]) conn_a();
+module conn_c() {
+    keep([L,C,K,A]) outer() faces();
+}
+
+rotate([180,0,0]) conn_c();
