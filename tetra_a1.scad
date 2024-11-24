@@ -132,4 +132,5 @@ module conn_a() {
     keep([K,M,S,N]) outer() faces();
 }
 
+rotate([180,0,0])
 conn_a();
