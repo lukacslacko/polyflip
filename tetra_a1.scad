@@ -63,7 +63,11 @@ module all_inner_dovetails() {
 
 module all_outer_dovetails() {
     for(a=[120:120:360])
-        rotate(a) outer_dovetail_piece();
+        rotate(a) {
+            for (y=[0,edge_length*sqrt(3)/2])
+                translate([0,y,0])
+                outer_dovetail_piece();
+        }
 }
 
 module inner() {
@@ -86,13 +90,46 @@ C = pts[2];
 F = along(A,B,.5);
 G = along(B,C,1/3);
 H = along(B,C,2/3);
+E = along(A,C,.5);
 
-module piece_1a() { cut_through(F,G) faces(); }
-module piece_1b() { cut_through(H,A) faces(); }
-module piece_1c() { cut_through(A,H) cut_through(G,F) faces(); }
+W = A+(B-C);
+T = B+(C-A);
+Y = along(C,T,-.5);
+I = along(C,T,.5);
+X = along(B,T,.5);
+J = along(B,W,.5);
+U = along(A,W,1/3);
+V = along(A,W,2/3);
+Z = along(A,W,-1/3);
 
-intersection() {
-    hexagon();
-    outer() piece_1b();
+S = line_line(B,I, F,T);
+N = line_line(C,X, A,H);
+K = line_line(C,F, A,H);
+M = line_line(B,E, F,G);
+Q = line_line(F,G, A,J);
+R = line_line(B,V, A,J);
+L = line_line(A,Y, C,Z);
+
+module keep(vec) {
+    intersection() {
+        linear_extrude(2*thickness, center=true)
+        polygon(vec);
+        children();
+    }
 }
 
+module piece_1a() { cut_through(F,G) face(); }
+module piece_1b() { cut_through(H,A) face(); }
+module piece_1c() { cut_through(A,H) cut_through(G,F) face(); }
+
+module inner_face() {
+    translate([2,0,0]) inner() piece_1a();
+    translate([0,2,0]) inner() piece_1b();
+    inner() piece_1c();
+}
+
+module conn_a() {
+    keep([K,M,S,N]) outer() faces();
+}
+
+conn_a();

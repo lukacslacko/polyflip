@@ -14,3 +14,6 @@ function along(p, q, ratio) = p + ratio * (q-p);
 function triangle_points(edge_length) = 
     let(a = edge_length/2, rho = edge_length*sqrt(3)/6) 
     [[-a,-rho], [a,-rho], [0,2*rho]];
+
+function line_line(a,b, p,q) = 
+    along(a, b, cross(a-p,p-q)/cross(a-b,p-q));
