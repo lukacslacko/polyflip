@@ -22,6 +22,14 @@ module face() {
     }
 }
 
+module hexagon() {
+    linear_extrude(2*thickness, center=true)
+    hull() {
+        polygon(pts);
+        rotate(60) polygon(pts);
+    }
+}
+
 module faces() {
     face();
     for (a=[120:120:360])
@@ -37,9 +45,15 @@ module inner_dovetail_piece() {
 }
 
 module outer_dovetail_piece() {
-    translate([0, 2+depth-edge_length*sqrt(3)/6, 0])
-    rotate([180,0,0])
-    dovetail(width=2*edge_length, n=dovetail_n, thickness=thickness);
+    translate([0, -edge_length*sqrt(3)/6, 0])
+    intersection_for(y=[0,1])
+        mirror([0,y,0])
+        translate([0, 2+depth, 0])
+        rotate([180,0,0])
+        dovetail(
+            width=2*edge_length, 
+            n=dovetail_n, 
+            thickness=thickness);
 }
 
 module all_inner_dovetails() {
@@ -77,4 +91,8 @@ module piece_1a() { cut_through(F,G) faces(); }
 module piece_1b() { cut_through(H,A) faces(); }
 module piece_1c() { cut_through(A,H) cut_through(G,F) faces(); }
 
-outer() piece_1a();
+intersection() {
+    hexagon();
+    outer() piece_1b();
+}
+

@@ -31,3 +31,8 @@ module dovetail(width, n, thickness) {
         cube([width, width, dovetail_upper_cover + 10]);
     }
 }
+
+intersection_for (y=[0,1]) mirror([0,y,0])
+translate([0,8,0])
+rotate([180,0,0])
+dovetail(100, 10, 4);
