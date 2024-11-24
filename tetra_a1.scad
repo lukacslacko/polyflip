@@ -63,7 +63,7 @@ module inner_dovetail_piece() {
         zig_or_zag=true);
 }
 
-module outer_dovetail_piece() {
+module outer_dovetail_piece(zig_or_zag) {
     translate([0, -edge_length*sqrt(3)/6, 0])
     intersection_for(y=[0,1])
         mirror([0,y,0])
@@ -73,7 +73,7 @@ module outer_dovetail_piece() {
             width=2*edge_length, 
             n=dovetail_n, 
             thickness=thickness,
-            zig_or_zag=false);
+            zig_or_zag=zig_or_zag);
 }
 
 module all_inner_dovetails() {
@@ -84,9 +84,9 @@ module all_inner_dovetails() {
 module all_outer_dovetails() {
     for(a=[120:120:360])
         rotate(a) {
-            for (y=[0,edge_length*sqrt(3)/2])
-                translate([0,y,0])
-                outer_dovetail_piece();
+            translate([0,edge_length*sqrt(3)/2,0])
+            outer_dovetail_piece(zig_or_zag=true);
+            outer_dovetail_piece(zig_or_zag=false);
         }
 }
 
