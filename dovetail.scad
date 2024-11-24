@@ -31,5 +31,3 @@ module dovetail(width, n, thickness) {
         cube([width, width, dovetail_upper_cover + 10]);
     }
 }
-
-dovetail(100, 12, 3);

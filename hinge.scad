@@ -1,8 +1,8 @@
 $fn = 40;
 
 hinge_gap = 0.3;
-hinge_hole_d = 2;
-hinge_rod_d = 1.4;
+hinge_hole_d = 2.6;
+hinge_rod_d = 2.2;
 
 module hinge_hole_piece(width, depth, thickness) {
     h = width - hinge_gap;
@@ -29,7 +29,6 @@ module hinge_rod(width) {
 }
 
 module hinge(width, depth, thickness, n) {
-    assert(n%2 == 1);
     unit_width = width/n;
     shift = width/2 - unit_width/2;
     for (i=[0:2:n-1]) {
@@ -43,3 +42,7 @@ module hinge(width, depth, thickness, n) {
     }
     hinge_rod(width);
 }
+
+for (y=[-8,8]) translate([0,y,0])
+cube([30, 5, 4], center=true);
+hinge(30, 6, 4, 6);
