@@ -160,4 +160,4 @@ module conn_b() {
     keep([R,B,S,Q]) outer() faces();
 }
 
-rotate([180,0,0]) conn_b();
+rotate([180,0,0]) conn_c();

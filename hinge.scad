@@ -2,7 +2,7 @@ $fn = 40;
 
 hinge_gap = 0.3;
 hinge_hole_d = 2.6;
-hinge_rod_d = 2.2;
+hinge_rod_d = 1.8;
 
 module hinge_hole_piece(width, depth, thickness) {
     h = width - hinge_gap;
