@@ -95,6 +95,7 @@ module inner() {
         all_inner_dovetails();
         children();
     }
+    // Magnet size: 5x2.5x1.5
 }
 
 module outer() {
