@@ -1,7 +1,7 @@
 magnet_width = 5;
 magnet_height = 2.5;
 magnet_depth = 1.5;
-magnet_gap = .2;
+magnet_gap = .4;
 magnet_wall = .8;
 magnet_cover = .7;
 
@@ -15,7 +15,7 @@ module magnet_hole(p, q, thickness) {
     height = magnet_height + magnet_gap + magnet_cover;
     translate(v)
     rotate(a)
-    translate([-width/2, 0.6,  thickness - height + 0.01])
+    translate([-width/2, 0.8,  thickness - height + 0.01])
     cube([width, depth, height]);
 }
 
@@ -27,6 +27,9 @@ module magnet_holder() {
         cube([width, depth, height-.2]);
         translate([magnet_wall, -0.01, magnet_cover])
         cube([width-2*magnet_wall, depth-magnet_wall, height]);
+        translate([0,0,5/sqrt(2)+height/2])
+        rotate([45,0,0])
+        cube([100,5,5], center=true);
     }
 }
 
