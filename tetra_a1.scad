@@ -1,6 +1,7 @@
 use <dovetail.scad>
 use <hinged_triangle.scad>
 use <geometry.scad>
+use <magnet.scad>
 
 $fn = 40;
 
@@ -161,4 +162,5 @@ module conn_b() {
     keep([R,B,S,Q]) outer() faces();
 }
 
-rotate([180,0,0]) conn_c();
+inside_of_top(thickness=thickness, edges=[[F, G]])
+inner() piece_1a();
