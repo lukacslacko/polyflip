@@ -36,6 +36,7 @@ module magnet_holder() {
 module magnet_cut_outs(edges, thickness) {
     difference() {
         children();
+        translate([0,0,-thickness/2])
         for (edge=edges) magnet_hole(edge[0], edge[1], thickness);
     }
 }
