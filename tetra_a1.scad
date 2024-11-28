@@ -7,10 +7,10 @@ $fn = 40;
 
 thickness = 4;
 depth = 5;
-edge_length = 80;
+edge_length = 85;
 
-dovetail_n = 22;
-hinge_n = 14;
+dovetail_n = 24;
+hinge_n = 12;
 
 pts = triangle_points(edge_length);
 
@@ -162,5 +162,6 @@ module conn_b() {
     keep([R,B,S,Q]) outer() faces();
 }
 
-inside_of_top(thickness=thickness, edges=[[F, G]])
-inner() piece_1a();
+// inner_face();
+
+rotate([180,0,0]) conn_c();
