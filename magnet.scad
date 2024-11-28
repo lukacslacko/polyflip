@@ -41,13 +41,16 @@ module magnet_cut_outs(edges, thickness) {
     }
 }
 
+/*
 A = [-20, 0];
 B = [10, 10];
 C = [0, -10];
 magnet_cut_outs([[A,B],[B,C],[C,A]],4)
 linear_extrude(4)
 polygon([A, B, C]);
+*/
 
-for (y=[0,5,10])
-translate([10,-y,0])
+for (x=[1:2])
+for (y=[1:6])
+translate([10*x,-y*5,0])
 magnet_holder();
