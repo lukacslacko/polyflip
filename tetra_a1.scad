@@ -12,6 +12,8 @@ edge_length = 85;
 dovetail_n = 24;
 hinge_n = 12;
 
+assert(dovetail_n%4==0);
+
 pts = triangle_points(edge_length);
 
 module face() {
@@ -86,7 +88,7 @@ module all_outer_dovetails() {
     for(a=[120:120:360])
         rotate(a) {
             translate([0,edge_length*sqrt(3)/2,0])
-            outer_dovetail_piece(zig_or_zag=true);
+            outer_dovetail_piece(zig_or_zag=false);
             outer_dovetail_piece(zig_or_zag=false);
         }
 }
@@ -161,7 +163,5 @@ module conn_c() {
 module conn_b() {
     keep([R,B,S,Q]) outer() faces();
 }
-
-// inner_face();
 
 rotate([180,0,0]) conn_c();
