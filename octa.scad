@@ -187,4 +187,5 @@ module face_pair() {
     inner_face_1();
 }
 
-conn_d();
+rotate([180,0,0])
+conn_b();
