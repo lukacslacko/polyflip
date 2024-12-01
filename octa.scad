@@ -177,7 +177,7 @@ module conn_c() {
 }
 
 module conn_d() {
-    keep([A,MC,C,TL]) outer() faces();
+    keep([A,MC,C,L]) outer() faces();
 }
 
 module face_pair() {
@@ -187,5 +187,24 @@ module face_pair() {
     inner_face_1();
 }
 
-rotate([180,0,0])
-conn_b();
+module plane(radius) {
+    cube([100,100,2*radius],center=true);
+}
+
+module support() {
+    intersection() {
+        rho=edge_length/sqrt(6) - thickness/2 - 0.2;
+
+        plane(rho);
+        intersection_for(a=[90:90:360])
+        rotate(a+45)
+        rotate([90,0,0])
+        plane(rho);
+        intersection_for(a=[90:90:360])
+        rotate(a)
+        rotate([109.28/2,0,0])
+        plane(rho);
+    }
+}
+
+support();
